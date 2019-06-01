@@ -1,9 +1,78 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel = "stylesheet" href="css/style.css">
+      
     </head>
-    
+     <style>
+    body {
+    height: 850px;
+    background-image: url('https://images.pexels.com/photos/5412/water-blue-ocean.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: white;
+    text-shadow: 2px 2px 1px black;
+    font-family: "Palatino Liontype", "Book Antique", Palatino, serif;
+}
+#weatherContainer {
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 5px black;
+    padding: 50px;
+    border-radius: 10px;
+    position: absolute;
+    visibility: hidden;
+  
+}
+#weatheContainer h1 {
+    margin: 5px;
+    font-size: 42px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#searchContainer {
+    padding: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#searchContainer input {
+    width: 200px;
+}
+#searchContainer button {
+    background-color: rgb(1, 159, 198);
+    width: 75px;
+}
+.searchControl {
+    box-shadow: 2px 2px 5px black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#weatherMain {
+    display: block;
+    margin-block: 20px;
+}
+#weatherMain div {
+    display: inline-block;
+}
+
+#weatherDescriptionHeader {
+    font-size: 20px;
+    vertical-align: 50%; 
+}
+#temperature {
+    font-size: 38px;
+    vertical-align: 25%;
+}
+.bottomDetails {
+    display: block;
+    font-size: 24px;
+    text-align: right;
+}
+hr {
+    margin-bottom: 20px;
+}
+    </style>
 
     <body>
 
@@ -48,25 +117,25 @@ function searchWeather(searchTerm) {
 function init(resultFromServer) {
     switch(resultFromServer.weather[0].main) {
         case 'Clear':
-            document.body.style.backgroundImage = 'url("Clear.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
 
         case 'Clouds':
-            document.body.style.backgroundImage = 'url("Cloudy.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/158163/clouds-cloudporn-weather-lookup-158163.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
 
         case 'Rain':
         case 'Drizzle':
         case 'Mist':
-            document.body.style.backgroundImage = 'url("Rain.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
 
         case 'ThunderStorm':
-            document.body.style.backgroundImage = 'url("storm.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/53459/lightning-storm-weather-sky-53459.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
         
         case 'Snow':
-            document.body.style.backgroundImage = 'url("Snow.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/289649/pexels-photo-289649.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
 
         default:
