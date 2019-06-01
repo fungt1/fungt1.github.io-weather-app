@@ -5,11 +5,12 @@
     </head>
      <style>
     body {
-    height: 850px;
-    background-image: url('https://images.pexels.com/photos/5412/water-blue-ocean.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+   
+   background:  url('deafault.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
     color: white;
     text-shadow: 2px 2px 1px black;
     font-family: "Palatino Liontype", "Book Antique", Palatino, serif;
@@ -117,25 +118,25 @@ function searchWeather(searchTerm) {
 function init(resultFromServer) {
     switch(resultFromServer.weather[0].main) {
         case 'Clear':
-            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
+            document.body.style.backgroundImage = 'url("Clear.jpeg")';
             break;
 
         case 'Clouds':
-            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/158163/clouds-cloudporn-weather-lookup-158163.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
+            document.body.style.backgroundImage = 'url("Cloudy.jpeg")';
             break;
 
         case 'Rain':
         case 'Drizzle':
         case 'Mist':
-            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
+            document.body.style.backgroundImage = 'url("Rain.jpeg")';
             break;
 
         case 'ThunderStorm':
-            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/53459/lightning-storm-weather-sky-53459.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
+            document.body.style.backgroundImage = 'url("storm.jpeg")';
             break;
         
         case 'Snow':
-            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/289649/pexels-photo-289649.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
+            document.body.style.backgroundImage = 'url("Snow.jpeg")';
             break;
 
         default:
