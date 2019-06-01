@@ -81,3 +81,4 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         searchWeather(searchTerm);
     
 })
+    
