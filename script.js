@@ -1,4 +1,4 @@
-<script>
+
 let appId = 'b8e08a92f77fe0aba0b6883937d52d69';
 let units = 'Imperial';
 let searchMethod;
@@ -82,4 +82,4 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         searchWeather(searchTerm);
     
 })
-</script>
+
