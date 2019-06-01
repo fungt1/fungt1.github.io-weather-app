@@ -1,12 +1,81 @@
 <!DOCTYPE html>
 <html>
-     
     <head>
-           
-             <link href="css/style.css" rel="stylesheet">
+      
     </head>
-              
+     <style>
+    body {
+    height: 850px;
+    background-image: url('default.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: white;
+    text-shadow: 2px 2px 1px black;
+    font-family: "Palatino Liontype", "Book Antique", Palatino, serif;
+}
+#weatherContainer {
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 5px black;
+    padding: 50px;
+    border-radius: 10px;
+    position: absolute;
+    visibility: hidden;
+  
+}
+#weatheContainer h1 {
+    margin: 5px;
+    font-size: 42px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#searchContainer {
+    padding: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#searchContainer input {
+    width: 200px;
+}
+#searchContainer button {
+    background-color: rgb(1, 159, 198);
+    width: 75px;
+}
+.searchControl {
+    box-shadow: 2px 2px 5px black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#weatherMain {
+    display: block;
+    margin-block: 20px;
+}
+#weatherMain div {
+    display: inline-block;
+}
+
+#weatherDescriptionHeader {
+    font-size: 20px;
+    vertical-align: 50%; 
+}
+#temperature {
+    font-size: 38px;
+    vertical-align: 25%;
+}
+.bottomDetails {
+    display: block;
+    font-size: 24px;
+    text-align: right;
+}
+hr {
+    margin-bottom: 20px;
+}
+    </style>
+
     <body>
+
         <div id="searchContainer">
             <input class="searchControl" type="text" placeholder="City Name or Zipcode" id="searchInput">
             <button class="searchControl" id="searchBtn">Search</button>
@@ -24,8 +93,8 @@
             <div id ="humidity" class="bottomDetails"></div>
         </div>
         </div>
-     <script>
-          let appId = 'b8e08a92f77fe0aba0b6883937d52d69';
+         <script>
+    let appId = 'b8e08a92f77fe0aba0b6883937d52d69';
 let units = 'Imperial';
 let searchMethod;
 
@@ -38,7 +107,7 @@ function getSearchMethod(searchTerm) {
 
 function searchWeather(searchTerm) {
     getSearchMethod(searchTerm);
-    fetch(`http://api.openweathermap.org/data/2.5/weather?${searchMethod}=${searchTerm}&APPID=${appId}&units=${units}`).then(result => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?${searchMethod}=${searchTerm}&APPID=${appId}&units=${units}`).then(result => {
         return result.json();
     }).then(result => {
         init(result);
@@ -79,7 +148,7 @@ function init(resultFromServer) {
     let cityHeader = document.getElementById('cityHeader');
     let weatherIcon = document.getElementById('documentIconImg');
 
-    weatherIcon.src = 'http://openweathermap.org/img/w/' + resultFromServer.weather[0].icon + '.png';
+    weatherIcon.src = 'https://openweathermap.org/img/w/' + resultFromServer.weather[0].icon + '.png';
 
     let resultDescription = resultFromServer.weather[0].description;
     weatherDescriptionHeader.innerText = resultDescription.charAt(0).toUpperCase() + resultDescription.slice(1);
@@ -108,8 +177,7 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         searchWeather(searchTerm);
     
 })
-         </script>
+    </script>
     </body>
     
-   
 </html>
