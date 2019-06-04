@@ -145,21 +145,29 @@ function init(resultFromServer) {
     let weatherDescriptionHeader = document.getElementById('weatherDescriptionHeader');
     let temperatureElement = document.getElementById('temperature');
     let humidityElement = document.getElementById('humidity');
+    let sunriseElement = document.getElementById('sunrise');
+    let sunsetElement = document.getElementById('sunset');
     let windSpeedElement = document.getElementById('windSpeed');
     let cityHeader = document.getElementById('cityHeader');
     let weatherIcon = document.getElementById('documentIconImg');
-
     weatherIcon.src = 'https://openweathermap.org/img/w/' + resultFromServer.weather[0].icon + '.png';
-
     let resultDescription = resultFromServer.weather[0].description;
     weatherDescriptionHeader.innerText = resultDescription.charAt(0).toUpperCase() + resultDescription.slice(1);
-
     temperatureElement.innerHTML = Math.floor(resultFromServer.main.temp) + '&#176'; 
     windSpeedElement.innerHTML = 'Winds at ' + Math.floor(resultFromServer.wind.speed) + ' m/s';
     cityHeader.innerHTML = resultFromServer.name;
     humidityElement.innerHTML = 'Humidity levels at ' + resultFromServer.main.humidity + '%';
-
+    sunriseElement.innerHTML = 'Sunrise at ' + TimeStampCon(resultFromServer.sys.sunrise) + 'am';
+    sunsetElement.innerHTML = 'Sunset at ' +  TimeStampCon(resultFromServer.sys.sunset) + 'pm';
     setPositionForWeatherInfo();
+
+}
+    function TimeStampCon(t)
+        {
+    let dt = new Date(t*1000);
+    let hr = dt.getHours();
+    let m = "0" + dt.getMinutes();
+    return hr+ ':' + m.substr(-2);  
 }
 
 function setPositionForWeatherInfo() {
