@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Weather Application</title>
+      
     </head>
      <style>
     body {
@@ -74,6 +74,7 @@ hr {
     </style>
 
     <body>
+    
 
         <div id="searchContainer">
             <input class="searchControl" type="text" placeholder="City Name or Zipcode" id="searchInput">
@@ -93,6 +94,7 @@ hr {
             <div id ="sunrise" class="bottomDetails"></div>
             <div id= "sunset" class="bottomDetails"></div>
         </div>
+     
         </div>
         
          <script>
@@ -116,7 +118,7 @@ function searchWeather(searchTerm) {
 function init(resultFromServer) {
     switch(resultFromServer.weather[0].main) {
         case 'Clear':
-            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
+            document.body.style.backgroundImage = 'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLJ23FwGgTXGECa2mRH43KOdjN0W6NJWiRG7bhgTiA-VHnmSGB")';
             break;
         case 'Clouds':
             document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/158163/clouds-cloudporn-weather-lookup-158163.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
@@ -136,6 +138,7 @@ function init(resultFromServer) {
         default:
             break;
     }
+  
     let weatherDescriptionHeader = document.getElementById('weatherDescriptionHeader');
     let temperatureElement = document.getElementById('temperature');
     let humidityElement = document.getElementById('humidity');
@@ -147,6 +150,7 @@ function init(resultFromServer) {
     weatherIcon.src = 'https://openweathermap.org/img/w/' + resultFromServer.weather[0].icon + '.png';
     let resultDescription = resultFromServer.weather[0].description;
     weatherDescriptionHeader.innerText = resultDescription.charAt(0).toUpperCase() + resultDescription.slice(1);
+   
     temperatureElement.innerHTML = Math.floor(resultFromServer.main.temp) + '&#176'; 
     windSpeedElement.innerHTML = 'Winds at ' + Math.floor(resultFromServer.wind.speed) + ' m/s';
     cityHeader.innerHTML = resultFromServer.name;
@@ -158,11 +162,18 @@ function init(resultFromServer) {
 }
 function TimeStampCon(t)
 {
-var dt = new Date(t*1000);
-var hr = dt.getHours();
-var m = "0" + dt.getMinutes();
+let dt = new Date(t*1000);
+let hr = dt.getHours();
+if (hr > 12) {
+    hr -= 12;
+} else if (hr === 0) {
+   hr = 12;
+}
+let m = "0" + dt.getMinutes();
 return hr+ ':' + m.substr(-2);  
 }
+
+
 
 function setPositionForWeatherInfo() {
     let weatherContainer = document.getElementById('weatherContainer');
