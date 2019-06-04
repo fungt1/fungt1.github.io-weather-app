@@ -6,7 +6,7 @@
      <style>
     body {
    
-   background:  url('default.jpg') no-repeat center center fixed; 
+   background:  url('https://images.pexels.com/photos/5412/water-blue-ocean.jpg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -48,7 +48,6 @@
     border-radius: 5px;
     padding: 5px;
 }
-
 #weatherMain {
     display: block;
     margin-block: 20px;
@@ -56,7 +55,6 @@
 #weatherMain div {
     display: inline-block;
 }
-
 #weatherDescriptionHeader {
     font-size: 20px;
     vertical-align: 50%; 
@@ -92,20 +90,21 @@ hr {
             <hr>
             <div id ="windSpeed" class="bottomDetails"></div>
             <div id ="humidity" class="bottomDetails"></div>
+            <div id ="sunrise" class="bottomDetails"></div>
+            <div id= "sunset" class="bottomDetails"></div>
         </div>
         </div>
+        
          <script>
-    let appId = 'b8e08a92f77fe0aba0b6883937d52d69';
+let appId = 'b8e08a92f77fe0aba0b6883937d52d69';
 let units = 'Imperial';
 let searchMethod;
-
 function getSearchMethod(searchTerm) {
     if(searchTerm.length === 5 && Number.parseInt(searchTerm) + '' === searchTerm)
         searchMethod = 'zip';
     else 
         searchMethod = 'q';
 }
-
 function searchWeather(searchTerm) {
     getSearchMethod(searchTerm);
     fetch(`https://api.openweathermap.org/data/2.5/weather?${searchMethod}=${searchTerm}&APPID=${appId}&units=${units}`).then(result => {
@@ -114,31 +113,26 @@ function searchWeather(searchTerm) {
         init(result);
     })
 }
-
 function init(resultFromServer) {
     switch(resultFromServer.weather[0].main) {
         case 'Clear':
-            document.body.style.backgroundImage = 'url("Clear.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
-
         case 'Clouds':
-            document.body.style.backgroundImage = 'url("Cloudy.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/158163/clouds-cloudporn-weather-lookup-158163.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
-
         case 'Rain':
         case 'Drizzle':
         case 'Mist':
-            document.body.style.backgroundImage = 'url("Rain.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
-
         case 'ThunderStorm':
-            document.body.style.backgroundImage = 'url("storm.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/53459/lightning-storm-weather-sky-53459.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
         
         case 'Snow':
-            document.body.style.backgroundImage = 'url("Snow.jpeg")';
+            document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/289649/pexels-photo-289649.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260")';
             break;
-
         default:
             break;
     }
@@ -162,24 +156,22 @@ function init(resultFromServer) {
     setPositionForWeatherInfo();
 
 }
-    function TimeStampCon(t)
-        {
-    let dt = new Date(t*1000);
-    let hr = dt.getHours();
-    let m = "0" + dt.getMinutes();
-    return hr+ ':' + m.substr(-2);  
+function TimeStampCon(t)
+{
+var dt = new Date(t*1000);
+var hr = dt.getHours();
+var m = "0" + dt.getMinutes();
+return hr+ ':' + m.substr(-2);  
 }
 
 function setPositionForWeatherInfo() {
     let weatherContainer = document.getElementById('weatherContainer');
     let weatherContainerHeight = weatherContainer.clientHeight;
     let weatherContainerWidth = weatherContainer.clientWidth;
-
     weatherContainer.style.left = `calc(50% - ${weatherContainerWidth/2}px)`;
     weatherContainer.style.top = `calc(50% - ${weatherContainerHeight/1.3}px)`;
     weatherContainer.style.visibility = 'visible';
 }
-
 document.getElementById('searchBtn').addEventListener('click', () => {
     let searchTerm = document.getElementById('searchInput').value;
     if(searchTerm) 
