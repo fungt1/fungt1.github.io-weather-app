@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <h1>Zip code is in progress. City Name is preferred</h1>
+      
     </head>
      <style>
     body {
@@ -16,6 +16,8 @@
     font-family: "Palatino Liontype", "Book Antique", Palatino, serif;
 }
 #weatherContainer {
+	
+	margin: auto;
     background-color: rgba(0, 0, 0, 0.25);
     box-shadow: 1px 1px 5px black;
     padding: 50px;
@@ -114,12 +116,37 @@ body {
   text-align: center;
   
 }
-
+/*Time*/
+div#widget {
+  position: absolute;
+  left: 0px;
+  border-radius: 5px;
+  color: white;
+  font-family: sans-serif;
+  margin: 0 auto;
+  width: fit-content;
+}
+div#widget > div#time {
+  font-size: 24px;
+  padding: 10px 20px 0;
+}
+div#widget > div#date {
+  font-size: 14px;
+  margin: 0 auto;
+  padding: 0 20px 5px;
+  position: relative;
+  text-align: right;
+  top: -5px;
+  width: fit-content;
+}
 
     </style>
 
     <body>
-    
+    <div id="widget">
+  <div id="time"></div>
+  <div id="date"></div>
+</div>
 
         <div id="searchContainer">
             <input class="searchControl" type="text" placeholder="City Name or Zipcode" id="searchInput">
@@ -147,7 +174,7 @@ body {
     <div class="card">
       <h3 id = "firstHour"></h3>
       <p id = "tempHour1"></p>
-      <p id ="iconImg1"></p>
+      <p><img id ="iconImg1"></p>
     </div>
   </div>
 
@@ -155,7 +182,7 @@ body {
     <div class="card">
       <h3 id = "secondHour"></h3>
       <p id = "tempHour2"></p>
-      <p>Some text</p>
+      <p><img id ="iconImg2"></p>
     </div>
   </div>
   
@@ -163,7 +190,7 @@ body {
      <div class="card">
       <h3 id = "thirdHour"></h3>
       <p id = "tempHour3"></p>
-      <p>Some text</p>
+      <p><img id ="iconImg3"></p>
     </div>
   </div>
   
@@ -171,7 +198,7 @@ body {
     <div class="card">
       <h3 id = "forthHour"></h3>
       <p id = "tempHour4"></p>
-      <p>Some text</p>
+      <p><img id ="iconImg4"></p>
     </div>
   </div>
 </div>
@@ -286,22 +313,28 @@ function linit(resultFromServer) {
  let weatherIcon1 = document.getElementById('iconImg1');
  firstHourElement.innerHTML = TimeStampCon(resultFromServer.list[0].dt); 
  tempElement1.innerHTML = Math.floor(resultFromServer.list[0].main.temp) + '&#176';
- //weatherIcon1.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[0].weather[0].icon + '.png';
+ weatherIcon1.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[0].weather[0].icon + '.png';
    
  let secondHourElement = document.getElementById('secondHour');
  let tempElement2 = document.getElementById('tempHour2');
+ let weatherIcon2 = document.getElementById('iconImg2');
  secondHourElement.innerHTML = TimeStampCon(resultFromServer.list[1].dt); 
  tempElement2.innerHTML = Math.floor(resultFromServer.list[1].main.temp) + '&#176';
+ weatherIcon2.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[1].weather[0].icon + '.png';
  
  let thirdHourElement = document.getElementById('thirdHour');
  let tempElement3 = document.getElementById('tempHour3');
+ let weatherIcon3 = document.getElementById('iconImg3');
  thirdHourElement.innerHTML = TimeStampCon(resultFromServer.list[2].dt); 
  tempElement3.innerHTML = Math.floor(resultFromServer.list[2].main.temp) + '&#176';
+ weatherIcon3.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[2].weather[0].icon + '.png';
  
  let forthHourElement = document.getElementById('forthHour');
  let tempElement4 = document.getElementById('tempHour4');
+ let weatherIcon4 = document.getElementById('iconImg4');
  forthHourElement.innerHTML = TimeStampCon(resultFromServer.list[3].dt); 
  tempElement4.innerHTML = Math.floor(resultFromServer.list[3].main.temp) + '&#176';
+ weatherIcon4.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[3].weather[0].icon + '.png';
    
  }
  
@@ -341,6 +374,22 @@ document.getElementById('searchBtn').addEventListener('click', () => {
     
 })
     </script>
+<script>
+window.setInterval('datetime()', 1000);
+
+function datetime() {
+  var time   = new Date ();
+  var hour = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours());
+  var minute = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes());
+  var second = (time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds());
+  document.getElementById('time').innerHTML  =
+    hour + ':' + minute + ':' + second;
+  document.getElementById('date').innerHTML =
+    time.getDate() + '.' + (time.getMonth() + 1) + '.' + time.getFullYear();
+}
+
+datetime();
+</script>
     </body>
     
 </html>
