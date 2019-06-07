@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <h1>Zip code is in progress. City Name is preferred</h1>
+      <h1>Zip code is in progress. City Name is preferred</h1>
     </head>
      <style>
     body {
@@ -71,6 +71,51 @@
 hr {
     margin-bottom: 20px;
 }
+/*new stuff*/
+* {
+  box-sizing: border-box;
+  
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  
+}
+
+
     </style>
 
     <body>
@@ -80,9 +125,6 @@ hr {
             <input class="searchControl" type="text" placeholder="City Name or Zipcode" id="searchInput">
             <button class="searchControl" id="searchBtn">Search</button>
         </div>
-        <div class="about-header">
-        <h1 class="about-header__title">Zip code is a work in progress. City name is preferred</h1>
-    </div>
         <div id="weatherContainer">
             <div id ="weatherDescription">
                 <h1 id ="cityHeader"></h1>
@@ -96,9 +138,47 @@ hr {
             <div id ="humidity" class="bottomDetails"></div>
             <div id ="sunrise" class="bottomDetails"></div>
             <div id= "sunset" class="bottomDetails"></div>
-        </div>
-     
-        </div>
+            
+             </div>
+  
+         
+ <div class="row">
+  <div class="column">
+    <div class="card">
+      <h3 id = "firstHour"></h3>
+      <p id = "tempHour1"></p>
+      <p id ="iconImg1"></p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <h3 id = "secondHour"></h3>
+      <p id = "tempHour2"></p>
+      <p>Some text</p>
+    </div>
+  </div>
+  
+  <div class="column">
+     <div class="card">
+      <h3 id = "thirdHour"></h3>
+      <p id = "tempHour3"></p>
+      <p>Some text</p>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <h3 id = "forthHour"></h3>
+      <p id = "tempHour4"></p>
+      <p>Some text</p>
+    </div>
+  </div>
+</div>
+  
+</div>
+            
+ 
         
          <script>
 let appId = 'b8e08a92f77fe0aba0b6883937d52d69';
@@ -118,6 +198,8 @@ function searchWeather(searchTerm) {
         init(result);
     })
 }
+
+    
 function init(resultFromServer) {
     switch(resultFromServer.weather[0].main) {
         case 'Clear':
@@ -141,7 +223,9 @@ function init(resultFromServer) {
         default:
             break;
     }
-  
+    
+    
+   
     let weatherDescriptionHeader = document.getElementById('weatherDescriptionHeader');
     let temperatureElement = document.getElementById('temperature');
     let humidityElement = document.getElementById('humidity');
@@ -160,9 +244,73 @@ function init(resultFromServer) {
     humidityElement.innerHTML = 'Humidity levels at ' + resultFromServer.main.humidity + '%';
     sunriseElement.innerHTML = 'Sunrise at ' + TimeStampCon(resultFromServer.sys.sunrise) + 'am';
     sunsetElement.innerHTML = 'Sunset at ' +  TimeStampCon(resultFromServer.sys.sunset) + 'pm';
+ 
     setPositionForWeatherInfo();
 
 }
+function searchHourlyWeather(searchTerm) {
+    getSearchMethod(searchTerm);
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${searchTerm}&APPID=${appId}&units=${units}`).then(result => {
+        return result.json();
+    }).then(result => {
+        linit(result);
+    })
+}
+function linit(resultFromServer) {
+    //conosle.log(resultFromServer);
+     switch(resultFromServer.list.main) {
+        case 'Clear':
+           
+            break;
+        case 'Clouds':
+           
+            break;
+        case 'Rain':
+        case 'Drizzle':
+        case 'Mist':
+          
+            break;
+        case 'ThunderStorm':
+           
+            break;
+        
+        case 'Snow':
+            
+            break;
+        default:
+            break;
+    }
+   
+ let firstHourElement = document.getElementById('firstHour');
+ let tempElement1 = document.getElementById('tempHour1');
+ let weatherIcon1 = document.getElementById('iconImg1');
+ firstHourElement.innerHTML = TimeStampCon(resultFromServer.list[0].dt); 
+ tempElement1.innerHTML = Math.floor(resultFromServer.list[0].main.temp) + '&#176';
+ //weatherIcon1.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[0].weather[0].icon + '.png';
+   
+ let secondHourElement = document.getElementById('secondHour');
+ let tempElement2 = document.getElementById('tempHour2');
+ secondHourElement.innerHTML = TimeStampCon(resultFromServer.list[1].dt); 
+ tempElement2.innerHTML = Math.floor(resultFromServer.list[1].main.temp) + '&#176';
+ 
+ let thirdHourElement = document.getElementById('thirdHour');
+ let tempElement3 = document.getElementById('tempHour3');
+ thirdHourElement.innerHTML = TimeStampCon(resultFromServer.list[2].dt); 
+ tempElement3.innerHTML = Math.floor(resultFromServer.list[2].main.temp) + '&#176';
+ 
+ let forthHourElement = document.getElementById('forthHour');
+ let tempElement4 = document.getElementById('tempHour4');
+ forthHourElement.innerHTML = TimeStampCon(resultFromServer.list[3].dt); 
+ tempElement4.innerHTML = Math.floor(resultFromServer.list[3].main.temp) + '&#176';
+   
+ }
+ 
+document.getElementById('searchBtn').addEventListener('click', () => {
+    let searchTerm = document.getElementById('searchInput').value;
+    if(searchTerm) 
+        searchHourlyWeather(searchTerm);
+ })
+
 function TimeStampCon(t)
 {
 let dt = new Date(t*1000);
