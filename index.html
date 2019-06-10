@@ -18,6 +18,7 @@
 #weatherContainer {
 	
 	margin: auto;
+     
     background-color: rgba(0, 0, 0, 0.25);
     box-shadow: 1px 1px 5px black;
     padding: 50px;
@@ -77,17 +78,19 @@ hr {
 * {
   box-sizing: border-box;
   
+  
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 /* Float four columns side by side */
 .column {
   float: left;
-  width: 25%;
-  padding: 0 10px;
+  width: 15%;
+  
 }
 
 /* Remove extra left and right margins, due to padding */
@@ -115,6 +118,24 @@ body {
   padding: 16px;
   text-align: center;
   
+}
+/*Scrool function*/
+div.scrollmenu {
+ 
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
 }
 /*Time*/
 div#widget {
@@ -168,7 +189,7 @@ div#widget > div#date {
             
              </div>
   
-         
+ <div class="scrollmenu">        
  <div class="row">
   <div class="column">
     <div class="card">
@@ -201,8 +222,25 @@ div#widget > div#date {
       <p><img id ="iconImg4"></p>
     </div>
   </div>
-</div>
   
+  <div class="column">
+    <div class="card">
+      <h3 id = "fifthHour"></h3>
+      <p id = "tempHour5"></p>
+      <p><img id ="iconImg5"></p>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <h3 id = "sixthHour"></h3>
+      <p id = "tempHour6"></p>
+      <p><img id ="iconImg6"></p>
+    </div>
+  </div>
+  
+</div>
+  </div>
 </div>
             
  
@@ -269,8 +307,8 @@ function init(resultFromServer) {
     windSpeedElement.innerHTML = 'Winds at ' + Math.floor(resultFromServer.wind.speed) + ' m/s';
     cityHeader.innerHTML = resultFromServer.name;
     humidityElement.innerHTML = 'Humidity levels at ' + resultFromServer.main.humidity + '%';
-    sunriseElement.innerHTML = 'Sunrise at ' + TimeStampCon(resultFromServer.sys.sunrise) + 'am';
-    sunsetElement.innerHTML = 'Sunset at ' +  TimeStampCon(resultFromServer.sys.sunset) + 'pm';
+    sunriseElement.innerHTML = 'Sunrise at ' + TimeStampCon(resultFromServer.sys.sunrise);
+    sunsetElement.innerHTML = 'Sunset at ' +  TimeStampCon(resultFromServer.sys.sunset);
  
     setPositionForWeatherInfo();
 
@@ -335,6 +373,21 @@ function linit(resultFromServer) {
  forthHourElement.innerHTML = TimeStampCon(resultFromServer.list[3].dt); 
  tempElement4.innerHTML = Math.floor(resultFromServer.list[3].main.temp) + '&#176';
  weatherIcon4.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[3].weather[0].icon + '.png';
+ 
+ let fifthHourElement = document.getElementById('fifthHour');
+ let tempElement5 = document.getElementById('tempHour5');
+ let weatherIcon5 = document.getElementById('iconImg5');
+ fifthHourElement.innerHTML = TimeStampCon(resultFromServer.list[4].dt); 
+ tempElement5.innerHTML = Math.floor(resultFromServer.list[4].main.temp) + '&#176';
+ weatherIcon5.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[4].weather[0].icon + '.png';
+ 
+ let sixthHourElement = document.getElementById('sixthHour');
+ let tempElement6 = document.getElementById('tempHour6');
+ let weatherIcon6 = document.getElementById('iconImg6');
+ sixthHourElement.innerHTML = TimeStampCon(resultFromServer.list[5].dt); 
+ tempElement6.innerHTML = Math.floor(resultFromServer.list[5].main.temp) + '&#176';
+ weatherIcon6.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[5].weather[0].icon + '.png';
+   
    
  }
  
@@ -344,19 +397,32 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         searchHourlyWeather(searchTerm);
  })
 
+
+window.setInterval('datetime()', 1000);
+
+function datetime() {
+  var time   = new Date ();
+  var hour = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours());
+  var minute = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes());
+  document.getElementById('time').innerHTML  =
+    hour + ':' + minute;
+  document.getElementById('date').innerHTML =
+    time.getDate() + '.' + (time.getMonth() + 1) + '.' + time.getFullYear();
+}
+
 function TimeStampCon(t)
 {
 let dt = new Date(t*1000);
 let hr = dt.getHours();
+let ampm = hr >= 12 ? 'pm' : 'am';
 if (hr > 12) {
     hr -= 12;
 } else if (hr === 0) {
    hr = 12;
 }
 let m = "0" + dt.getMinutes();
-return hr+ ':' + m.substr(-2);  
+return hr+ ':' + m.substr(-2) + ampm;  
 }
-
 
 
 function setPositionForWeatherInfo() {
@@ -374,22 +440,6 @@ document.getElementById('searchBtn').addEventListener('click', () => {
     
 })
     </script>
-<script>
-window.setInterval('datetime()', 1000);
 
-function datetime() {
-  var time   = new Date ();
-  var hour = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours());
-  var minute = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes());
-  var second = (time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds());
-  document.getElementById('time').innerHTML  =
-    hour + ':' + minute + ':' + second;
-  document.getElementById('date').innerHTML =
-    time.getDate() + '.' + (time.getMonth() + 1) + '.' + time.getFullYear();
-}
-
-datetime();
-</script>
-    </body>
     
 </html>
