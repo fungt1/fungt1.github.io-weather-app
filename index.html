@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      
+      <center>City Name is the most accurate for searching weather.</center>
     </head>
      <style>
     body {
@@ -115,43 +115,6 @@ body {
   text-align: center;
   
 }
-/*Scrool function
-div.scrollmenu {
- grid-template-columns: repeat(6, calc(50% - 40px));
-  grid-template-rows: minmax(150px, 1fr);
-  overflow: auto;
-  white-space: nowrap;
-}
-
-div.scrollmenu a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
-}
-
-div.scrollmenu a:hover {
-  background-color: #777;
-}*/
-.scroll{
-overflow-x: scroll;
-overflow-y: hidden;
-  display: block;
-  height: 200px;
-  
-}
-
-.row{
-  white-space: nowrap
-}
-
-.column{
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-
-}
 /*Time*/
 div#widget {
   position: absolute;
@@ -174,6 +137,21 @@ div#widget > div#date {
   text-align: right;
   top: -5px;
   width: fit-content;
+}
+/*Scroll function*/
+:root {
+  --gutter: 0px;
+}
+
+.column {
+  display: grid;
+  grid-gap: calc(var(--gutter) / 2);
+  grid-template-columns: repeat(9, calc(20% - var(--gutter) * 2));
+  
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  padding-bottom: calc(.75 * var(--gutter));
+  margin-bottom: calc(-.25 * var(--gutter));
 }
 
     </style>
@@ -204,82 +182,54 @@ div#widget > div#date {
             
              </div>
   
- <div class="scroll">        
- <div class="row">
   <div class="column">
     <div class="card">
       <h3 id = "firstHour"></h3>
       <p id = "tempHour1"></p>
       <p><img id ="iconImg1"></p>
     </div>
-  </div>
-
-  <div class="column">
     <div class="card">
       <h3 id = "secondHour"></h3>
       <p id = "tempHour2"></p>
       <p><img id ="iconImg2"></p>
     </div>
-  </div>
-  
-  <div class="column">
      <div class="card">
       <h3 id = "thirdHour"></h3>
       <p id = "tempHour3"></p>
       <p><img id ="iconImg3"></p>
     </div>
-  </div>
-  
-  <div class="column">
     <div class="card">
       <h3 id = "forthHour"></h3>
       <p id = "tempHour4"></p>
       <p><img id ="iconImg4"></p>
     </div>
-  </div>
-  
-  <div class="column">
     <div class="card">
       <h3 id = "fifthHour"></h3>
       <p id = "tempHour5"></p>
       <p><img id ="iconImg5"></p>
     </div>
-  </div>
-  
-  <div class="column">
     <div class="card">
       <h3 id = "sixthHour"></h3>
       <p id = "tempHour6"></p>
       <p><img id ="iconImg6"></p>
     </div>
-  </div>
-  
-   <div class="column">
     <div class="card">
       <h3 id = "seventhHour"></h3>
       <p id = "tempHour7"></p>
       <p><img id ="iconImg7"></p>
     </div>
-  </div>
-  
-   <div class="column">
     <div class="card">
       <h3 id = "eigthHour"></h3>
       <p id = "tempHour8"></p>
       <p><img id ="iconImg8"></p>
     </div>
-  </div>
-  
-   <div class="column">
     <div class="card">
       <h3 id = "ninthHour"></h3>
       <p id = "tempHour9"></p>
       <p><img id ="iconImg9"></p>
     </div>
-  </div>
+ 
   
-</div>
-  </div>
 </div>
             
  
