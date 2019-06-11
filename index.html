@@ -87,14 +87,10 @@ body {
 }
 
 /* Float four columns side by side */
-.column {
-  float: left;
-  width: 15%;
-  
-}
 
 /* Remove extra left and right margins, due to padding */
 .row {margin: 0 -5px;}
+
 
 /* Clear floats after the columns */
 .row:after {
@@ -119,9 +115,10 @@ body {
   text-align: center;
   
 }
-/*Scrool function*/
+/*Scrool function
 div.scrollmenu {
- 
+ grid-template-columns: repeat(6, calc(50% - 40px));
+  grid-template-rows: minmax(150px, 1fr);
   overflow: auto;
   white-space: nowrap;
 }
@@ -136,6 +133,24 @@ div.scrollmenu a {
 
 div.scrollmenu a:hover {
   background-color: #777;
+}*/
+.scroll{
+overflow-x: scroll;
+overflow-y: hidden;
+  display: block;
+  height: 200px;
+  
+}
+
+.row{
+  white-space: nowrap
+}
+
+.column{
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+
 }
 /*Time*/
 div#widget {
@@ -189,7 +204,7 @@ div#widget > div#date {
             
              </div>
   
- <div class="scrollmenu">        
+ <div class="scroll">        
  <div class="row">
   <div class="column">
     <div class="card">
@@ -236,6 +251,30 @@ div#widget > div#date {
       <h3 id = "sixthHour"></h3>
       <p id = "tempHour6"></p>
       <p><img id ="iconImg6"></p>
+    </div>
+  </div>
+  
+   <div class="column">
+    <div class="card">
+      <h3 id = "seventhHour"></h3>
+      <p id = "tempHour7"></p>
+      <p><img id ="iconImg7"></p>
+    </div>
+  </div>
+  
+   <div class="column">
+    <div class="card">
+      <h3 id = "eigthHour"></h3>
+      <p id = "tempHour8"></p>
+      <p><img id ="iconImg8"></p>
+    </div>
+  </div>
+  
+   <div class="column">
+    <div class="card">
+      <h3 id = "ninthHour"></h3>
+      <p id = "tempHour9"></p>
+      <p><img id ="iconImg9"></p>
     </div>
   </div>
   
@@ -387,6 +426,27 @@ function linit(resultFromServer) {
  sixthHourElement.innerHTML = TimeStampCon(resultFromServer.list[5].dt); 
  tempElement6.innerHTML = Math.floor(resultFromServer.list[5].main.temp) + '&#176';
  weatherIcon6.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[5].weather[0].icon + '.png';
+ 
+ let seventhHourElement = document.getElementById('seventhHour');
+ let tempElement7 = document.getElementById('tempHour7');
+ let weatherIcon7 = document.getElementById('iconImg7');
+ seventhHourElement.innerHTML = TimeStampCon(resultFromServer.list[6].dt); 
+ tempElement7.innerHTML = Math.floor(resultFromServer.list[6].main.temp) + '&#176';
+ weatherIcon7.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[6].weather[0].icon + '.png';
+ 
+ let eigthHourElement = document.getElementById('eigthHour');
+ let tempElement8 = document.getElementById('tempHour8');
+ let weatherIcon8 = document.getElementById('iconImg8');
+ eigthHourElement.innerHTML = TimeStampCon(resultFromServer.list[7].dt); 
+ tempElement8.innerHTML = Math.floor(resultFromServer.list[7].main.temp) + '&#176';
+ weatherIcon8.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[7].weather[0].icon + '.png';
+ 
+ let ninthHourElement = document.getElementById('ninthHour');
+ let tempElement9 = document.getElementById('tempHour9');
+ let weatherIcon9 = document.getElementById('iconImg9');
+ninthHourElement.innerHTML = TimeStampCon(resultFromServer.list[8].dt); 
+ tempElement9.innerHTML = Math.floor(resultFromServer.list[8].main.temp) + '&#176';
+ weatherIcon9.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[8].weather[0].icon + '.png';
    
    
  }
