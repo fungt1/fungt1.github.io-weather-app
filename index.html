@@ -18,7 +18,7 @@
 #weatherContainer {
 	
 	margin: auto;
-     
+  	width: 60%; 
     background-color: rgba(0, 0, 0, 0.25);
     box-shadow: 1px 1px 5px black;
     padding: 50px;
@@ -86,13 +86,13 @@ body {
   
 }
 
-/* Float four columns side by side */
+/* Float four columns side by side*/
 
-/* Remove extra left and right margins, due to padding */
+/* Remove extra left and right margins, due to padding 
 .row {margin: 0 -5px;}
 
 
-/* Clear floats after the columns */
+/* Clear floats after the columns 
 .row:after {
   content: "";
   display: table;
@@ -101,7 +101,7 @@ body {
 
 /* Responsive columns */
 @media screen and (max-width: 600px) {
-  .column {
+  .card {
     width: 100%;
     display: block;
     margin-bottom: 20px;
@@ -152,6 +152,49 @@ div#widget > div#date {
   scroll-snap-type: x proximity;
   padding-bottom: calc(.75 * var(--gutter));
   margin-bottom: calc(-.25 * var(--gutter));
+}
+
+/*Weather part*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Create four equal columns that floats next to each other */
+.C {
+  float: left;
+  width: 20%;
+  padding: 10px;
+
+}
+
+/* Clear floats after the columns */
+.B:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .B {
+  
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.C {
+
+  
+  padding: 16px;
+  text-align: center;
+
 }
 
     </style>
@@ -228,11 +271,49 @@ div#widget > div#date {
       <p id = "tempHour9"></p>
       <p><img id ="iconImg9"></p>
     </div>
- 
-  
 </div>
-            
+
+
+
+  <div class="B">
+    <div class="C">
+      <h3 id = "date1"></h3>
+      <p id = "t1"></p>
+      <p><img id ="i1"></p>
+    </div>
+
+
+    <div class="C">
+       <h3 id = "date2"></h3>
+      <p id = "t2"></p>
+      <p><img id ="i2"></p>
+    </div>
+
+  
+  
+    <div class="C">
+      <h3 id = "date3"></h3>
+      <p id = "t3"></p>
+      <p><img id ="i3"></p>
+    </div>
+
+  
+  
+    <div class="C">
+      <h3 id = "date4"></h3>
+      <p id = "t4"></p>
+      <p><img id ="i4"></p>
+    </div>
  
+    <div class="C">
+       <h3 id = "date5"></h3>
+      <p id = "t5"></p>
+      <p><img id ="i5"></p>
+   
+  </div>
+  </div>
+
+ </body>
         
          <script>
 let appId = 'b8e08a92f77fe0aba0b6883937d52d69';
@@ -394,13 +475,48 @@ function linit(resultFromServer) {
  let ninthHourElement = document.getElementById('ninthHour');
  let tempElement9 = document.getElementById('tempHour9');
  let weatherIcon9 = document.getElementById('iconImg9');
-ninthHourElement.innerHTML = TimeStampCon(resultFromServer.list[8].dt); 
+ ninthHourElement.innerHTML = TimeStampCon(resultFromServer.list[8].dt); 
  tempElement9.innerHTML = Math.floor(resultFromServer.list[8].main.temp) + '&#176';
  weatherIcon9.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[8].weather[0].icon + '.png';
+ 
+ let firstDayElement = document.getElementById('date1');
+ let temp1 = document.getElementById('t1');
+ let weather1 = document.getElementById('i1');
+ firstDayElement.innerHTML = getDayName(resultFromServer.list[5].dt_txt); 
+ temp1.innerHTML = Math.floor(resultFromServer.list[5].main.temp) + '&#176';
+ weather1.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[5].weather[0].icon + '.png';
+ 
+ 
+ let secondDayElement = document.getElementById('date2');
+ let temp2 = document.getElementById('t2');
+ let weather2 = document.getElementById('i2');
+ secondDayElement.innerHTML = getDayName(resultFromServer.list[13].dt_txt); 
+ temp2.innerHTML = Math.floor(resultFromServer.list[13].main.temp) + '&#176';
+ weather2.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[13].weather[0].icon + '.png';
+ 
+ let thirdDayElement = document.getElementById('date3');
+ let temp3 = document.getElementById('t3');
+ let weather3 = document.getElementById('i3');
+ thirdDayElement.innerHTML = getDayName(resultFromServer.list[21].dt_txt); 
+ temp3.innerHTML = Math.floor(resultFromServer.list[21].main.temp) + '&#176';
+ weather3.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[21].weather[0].icon + '.png';
+ 
+ let forthDayElement = document.getElementById('date4');
+ let temp4 = document.getElementById('t4');
+ let weather4 = document.getElementById('i4');
+ forthDayElement.innerHTML = getDayName(resultFromServer.list[29].dt_txt); 
+ temp4.innerHTML = Math.floor(resultFromServer.list[29].main.temp) + '&#176';
+ weather4.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[29].weather[0].icon + '.png';
+ 
+ let fifthDayElement = document.getElementById('date5');
+ let temp5 = document.getElementById('t5');
+ let weather5 = document.getElementById('i5');
+ fifthDayElement.innerHTML = getDayName(resultFromServer.list[37].dt_txt); 
+ temp5.innerHTML = Math.floor(resultFromServer.list[37].main.temp) + '&#176';
+ weather5.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[37].weather[0].icon + '.png';
    
    
  }
- 
 document.getElementById('searchBtn').addEventListener('click', () => {
     let searchTerm = document.getElementById('searchInput').value;
     if(searchTerm) 
@@ -434,6 +550,11 @@ let m = "0" + dt.getMinutes();
 return hr+ ':' + m.substr(-2) + ampm;  
 }
 
+function getDayName(dateStr, locale)
+{
+    var date = new Date(dateStr);
+    return date.toLocaleDateString(locale, { weekday: 'long' });        
+}
 
 function setPositionForWeatherInfo() {
     let weatherContainer = document.getElementById('weatherContainer');
