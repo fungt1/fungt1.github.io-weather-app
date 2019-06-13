@@ -10,7 +10,6 @@
 	background-repeat:  no-repeat;
 	background-attachment: fixed;
 	background-size:  cover;
-	
     color: white;
     text-shadow: 2px 2px 1px black;
     font-family: "Palatino Liontype", "Book Antique", Palatino, serif;
@@ -23,9 +22,7 @@
 	bottom: 0;
 	left: 0;
 	right: 100;
-  	
 	margin: auto;
- 
     background-color: rgba(0, 0, 0, 0.25);
     box-shadow: 1px 1px 5px black;
     padding: 50px;
@@ -123,20 +120,12 @@ body {
   
 }
 /*Time*/
-div#widget {
-  position: absolute;
-  left: 0px;
-  border-radius: 5px;
-  color: white;
-  font-family: sans-serif;
-  margin: 0 auto;
-  width: fit-content;
-}
-div#widget > div#time {
+div#currentTime {
   font-size: 24px;
   padding: 10px 20px 0;
+  
 }
-div#widget > div#date {
+div#currentTime > div#date {
   font-size: 14px;
   margin: 0 auto;
   padding: 0 20px 5px;
@@ -207,9 +196,9 @@ body {
     </style>
 
     <body>
-    <div id="widget">
-  <div id="time"></div>
-  <div id="date"></div>
+
+  <div id="currentTime"></div>
+  <!--<div id="date"></div>-->
 </div>
 
         <div id="searchContainer">
@@ -535,10 +524,6 @@ window.setInterval('datetime()', 1000);
 
 function datetime() {
   var time   = new Date ();
-  var hour = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours());
-  var minute = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes());
-  document.getElementById('time').innerHTML  =
-    hour + ':' + minute;
   document.getElementById('date').innerHTML =
     time.getDate() + '.' + (time.getMonth() + 1) + '.' + time.getFullYear();
 }
@@ -594,6 +579,32 @@ else {
         document.body.background = "https://jooinn.com/images/trees-and-grass-field-under-cloudy-sky-during-daytime.jpg";
     }
 }
+
+window.onload = function() {
+  clock();  
+    function clock() {
+    var now = new Date();
+    var TwentyFourHour = now.getHours();
+    var hour = now.getHours();
+    var min = now.getMinutes();
+    var mid = 'pm';
+    if (min < 10) {
+      min = "0" + min;
+    }
+    if (hour > 12) {
+      hour = hour - 12;
+    }    
+    if(hour==0){ 
+      hour=12;
+    }
+    if(TwentyFourHour < 12) {
+       mid = 'am';
+    }     
+  document.getElementById('currentTime').innerHTML =     hour+':'+min+' '+mid ;
+    setTimeout(clock, 1000);
+    }
+}
+
 
 </script>
     
