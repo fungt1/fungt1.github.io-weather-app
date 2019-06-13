@@ -275,7 +275,7 @@ body {
 
 
 
-  <div class="B">
+  <!--<div class="B">
     <div class="C">
       <h3 id = "date1"></h3>
       <p id = "t1"></p>
@@ -311,7 +311,7 @@ body {
       <p><img id ="i5"></p>
    
   </div>
-  </div>
+  </div>-->
 
  </body>
         
@@ -479,7 +479,7 @@ function linit(resultFromServer) {
  tempElement9.innerHTML = Math.floor(resultFromServer.list[8].main.temp) + '&#176';
  weatherIcon9.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[8].weather[0].icon + '.png';
  
- let firstDayElement = document.getElementById('date1');
+/* let firstDayElement = document.getElementById('date1');
  let temp1 = document.getElementById('t1');
  let weather1 = document.getElementById('i1');
  firstDayElement.innerHTML = getDayName(resultFromServer.list[5].dt_txt); 
@@ -513,7 +513,7 @@ function linit(resultFromServer) {
  let weather5 = document.getElementById('i5');
  fifthDayElement.innerHTML = getDayName(resultFromServer.list[37].dt_txt); 
  temp5.innerHTML = Math.floor(resultFromServer.list[37].main.temp) + '&#176';
- weather5.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[37].weather[0].icon + '.png';
+ weather5.src = 'https://openweathermap.org/img/w/' + resultFromServer.list[37].weather[0].icon + '.png';*/
    
    
  }
