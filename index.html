@@ -5,20 +5,27 @@
     </head>
      <style>
     body {
-   
-   background:  url('https://images.pexels.com/photos/5412/water-blue-ocean.jpg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  
+ 	background-position: center center;
+	background-repeat:  no-repeat;
+	background-attachment: fixed;
+	background-size:  cover;
+	
     color: white;
     text-shadow: 2px 2px 1px black;
     font-family: "Palatino Liontype", "Book Antique", Palatino, serif;
 }
 #weatherContainer {
 	
+    width: 50%;
+	height: 75%;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
 	margin: auto;
-  	width: 60%; 
+ 
     background-color: rgba(0, 0, 0, 0.25);
     box-shadow: 1px 1px 5px black;
     padding: 50px;
@@ -338,7 +345,7 @@ function searchWeather(searchTerm) {
 function init(resultFromServer) {
     switch(resultFromServer.weather[0].main) {
         case 'Clear':
-            document.body.style.backgroundImage = 'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLJ23FwGgTXGECa2mRH43KOdjN0W6NJWiRG7bhgTiA-VHnmSGB")';
+            document.body.style.backgroundImage = 'url("https://wallpapercave.com/wp/CqOvBFE.jpg")';
             break;
         case 'Clouds':
             document.body.style.backgroundImage = 'url("https://images.pexels.com/photos/158163/clouds-cloudporn-weather-lookup-158163.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")';
@@ -570,7 +577,24 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         searchWeather(searchTerm);
     
 })
-    </script>
+   
+var currentTime = new Date().getHours();
+if (currentTime > 19 || currentTime < 6) {
+    if (document.body) {
+        document.body.background = "https://www.nps.gov/shen/learn/nature/images/20170922_BigMeadows_Night_DSC5591_mo.jpg?maxwidth=1200&maxheight=1200&autorotate=false";
+    }
+}
+else if (currentTime > 16 && currentTime < 19) {
+    if (document.body) {
+        document.body.background = "https://upload.wikimedia.org/wikipedia/commons/5/58/Sunset_2007-1.jpg";
+    }
+}
+else {
+    if (document.body) {
+        document.body.background = "https://jooinn.com/images/trees-and-grass-field-under-cloudy-sky-during-daytime.jpg";
+    }
+}
 
+</script>
     
 </html>
